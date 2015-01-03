@@ -8,18 +8,18 @@ url: "http://www.jvscott.net"
 more: "read more"
 
 # Comments
-disqus_username: "niklasbuschmann"
+disqus_username: "goonmygoon@gmail.com"
 #isso_domain: "comments.mysite.org"
 
 # Links
 
 links:
-  - github: "https://github.com/me/"
-  - twitter: "https://twitter.com/me/"
-  - google-plus: "https://plus.google.com/+me"
-  - reddit: "https://www.reddit.com/user/me/"
-  - youtube: "https://www.youtube.com/user/me"
-  - steam: "http://steamcommunity.com/id/me/"
+  - github: "https://github.com/JScott/"
+  - twitter: "https://twitter.com/AKindlyOrc/"
+#  - google-plus: "https://plus.google.com/+me"
+#  - reddit: "https://www.reddit.com/user/me/"
+#  - youtube: "https://www.youtube.com/user/me"
+#  - steam: "http://steamcommunity.com/id/me/"
 
 
 # Build settings
