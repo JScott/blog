@@ -1,42 +1,35 @@
-# Site settings
-title: Nightly Build
-author: JScott
-email: jvscott@gmail.com
-description: "Pushing the boundaries of spare time"
-baseurl: "/blog" # comment out if site is in root folder
-url: "http://www.jvscott.net"
-more: "read more"
+# Jekyll configuration
 
-# Comments
-disqus_username: "goonmygoon@gmail.com"
-#isso_domain: "comments.mysite.org"
+name: Nightly Build
+description: Pushing the boundaries of spare time
 
-# Links
+# url is currently only used only for the RSS feed in feed.xml
+url: http://jvscott.net
 
-links:
-  - github: "https://github.com/JScott/"
-  - twitter: "https://twitter.com/AKindlyOrc/"
-#  - google-plus: "https://plus.google.com/+me"
-#  - reddit: "https://www.reddit.com/user/me/"
-#  - youtube: "https://www.youtube.com/user/me"
-#  - steam: "http://steamcommunity.com/id/me/"
+# baseurl will often be '', but for a project page on gh-pages, it needs to
+# be the project name.
+# *** IMPORTANT: If your local "jekyll serve" throws errors change this to '' or
+#     run it like so: jekyll serve --baseurl=''
+baseurl: /blog
 
+# This can be '' to hide the Github nav button
+github: JScott
 
-# Build settings
+# Set this to your UA-# value, or '' to disable the block completely
+gaaccount: ''
+
+# Set this to your disqus shortname to enable comments. Note that the 'comments'
+# setting below must also be true. Individual posts can override 'comments' to
+# disable on a post-by-post basis
+disqus: 'JScott'
+comments: true
+
+permalink: /:title
+paginate: 3
+
+highlighter: pygments
 markdown: redcarpet
-permalink: /:title/
-excerpt_separator: "<!--more-->"
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 
-# Defaults
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      layout: "default"
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      comments: true
+exclude: ['README.md', 'LICENSE']
