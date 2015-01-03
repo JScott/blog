@@ -1,14 +1,42 @@
 # Site settings
-title: Nightly Build
-email: jvscott@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "/blog" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: AKindlyOrc
-github_username:  JScott
+title: blog title
+author: "Blog Author"
+email: me@mysite.org
+description: "Really cool blog about ... something"
+baseurl: "/contrast" # comment out if site is in root folder
+url: "http://mysite.org"
+more: "read more"
+
+# Comments
+disqus_username: "niklasbuschmann"
+#isso_domain: "comments.mysite.org"
+
+# Links
+
+links:
+  - github: "https://github.com/me/"
+  - twitter: "https://twitter.com/me/"
+  - google-plus: "https://plus.google.com/+me"
+  - reddit: "https://www.reddit.com/user/me/"
+  - youtube: "https://www.youtube.com/user/me"
+  - steam: "http://steamcommunity.com/id/me/"
+
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
+permalink: /:title/
+excerpt_separator: "<!--more-->"
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: true
