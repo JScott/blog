@@ -1,10 +1,10 @@
 # Site settings
-title: blog title
-author: "Blog Author"
-email: me@mysite.org
-description: "Really cool blog about ... something"
-baseurl: "/contrast" # comment out if site is in root folder
-url: "http://mysite.org"
+title: Nightly Build
+author: JScott
+email: jvscott@gmail.com
+description: "Pushing the boundaries of spare time"
+baseurl: "/blog" # comment out if site is in root folder
+url: "http://www.jvscott.net"
 more: "read more"
 
 # Comments
