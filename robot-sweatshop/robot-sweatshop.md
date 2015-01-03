@@ -22,4 +22,4 @@ Robot Sweatshop is a Continuous Integration server built with Ruby. It is:
 - Only requires Ruby 2.x and ZMQ, no JVM or DB
 - Processes over threads
 
-You can find the source code for Jekyll at [github.com/JScott/robot-sweatshop](https://github.com/JScott/robot-sweatshop)
+You can find the source code at [github.com/JScott/robot-sweatshop](https://github.com/JScott/robot-sweatshop)
