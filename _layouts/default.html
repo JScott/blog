@@ -10,8 +10,8 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-  <link href="{{ page.baseurl }}/assets/css/style.css" rel="stylesheet" />
-  <link href="{{ page.baseurl }}/assets/css/colors-dark.css" rel="stylesheet" />
+  <link href="{{ site.baseurl }}/assets/css/style.css" rel="stylesheet" />
+  <link href="{{ site.baseurl }}/assets/css/colors-dark.css" rel="stylesheet" />
 
 </head>
 
@@ -20,7 +20,7 @@
 
 
   <header id="header">
-    <h1><a href="{{ page.baseurl }}"><i class="icon-sun"></i> {{ site.name }}</a></h1>
+    <h1><a href="{{ site.baseurl }}"><i class="icon-sun"></i> {{ site.name }}</a></h1>
     <p>{{ site.description }}</p>
   </header>
 
@@ -33,11 +33,11 @@
     <div id="sidebar">
       <nav>
         <ul>
-          <li><a href="{{ page.baseurl }}">Home</a></li>
-          <li><a href="{{ page.baseurl }}/archives">Archive</a></li>
-          <li><a href="{{ page.baseurl }}/about">About</a></li>
-          <li><a href="http://twitter.com/AKindlyOrc">Twitter</a></li>
-          <li><a href="{{ page.baseurl }}/feed.xml">RSS Feed</a></li>
+          <li><a href="{{ site.baseurl }}">Home</a></li>
+          <li><a href="{{ site.baseurl }}/archives">Archive</a></li>
+          <li><a href="{{ site.baseurl }}/about">About</a></li>
+          <li><a href="http://twitter.com/{{ site.twitter }}">Twitter</a></li>
+          <li><a href="{{ site.baseurl }}/feed.xml">RSS Feed</a></li>
         </ul>
       </nav>
     </div>
