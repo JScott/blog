@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<p>Posts for {{ page.category }}</p>
+
 <div>
   {% if site.categories[page.category] %}
     {% for post in site.categories[page.category] %}
