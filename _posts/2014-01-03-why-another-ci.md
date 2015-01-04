@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Why we need another Continuous Integration server
-categories: robot-sweatshop
+categories:
+- robot-sweatshop
 ---
 
 The state of Continuous Integration as of writing is very opinionated. Drone wants Docker virtualization which is a good idea but demands a certain stack. Travis CI is very heavily tied into GitHub and not friendly for self-hosting. Both enforce the idea that 1 repository is linked to 1 build.
