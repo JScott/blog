@@ -1,14 +1,14 @@
 name: Nightly Build
 url: http://jvscott.net
 baseurl: /blog
-description: ''
-#Pushing the boundaries of spare time
+description: Pushing the boundaries of spare time with cool tools
 
+github: JScott
 twitter: AKindlyOrc
 
 #permalink: /:year/:month/:day/:title/
 permalink: /:title/
 paginate: 10
-pygments: true
+highlighter: pygments
 
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
