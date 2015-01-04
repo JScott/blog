@@ -1,20 +1,29 @@
 ---
 layout: post
-title: Why we need another Continuous Integration server
+title: Why make another Continuous Integration server?
 category: robot-sweatshop
 comments: true
 ---
 
-The state of Continuous Integration as of writing is very opinionated. Drone wants Docker virtualization which is a good idea but demands a certain stack. Travis CI is very heavily tied into GitHub and not friendly for self-hosting. Both enforce the idea that 1 repository is linked to 1 build.
+The state of Continuous Integration as of writing is very opinionated. [Drone](https://drone.io/) requires [Docker](https://www.docker.com/) virtualization which is a good idea but demands a certain stack. [Travis CI](https://travis-ci.org/) is tied into GitHub and is not friendly for self-hosting. Both enforce the idea that 1 repository is linked to 1 build.
 
-While these get most people up and running the CI very quickly, they will provide stumbling blocks over time. They'll restrict your stack, not let you hold your own data, and none of them handle sharded repositories very well. Oddly enough, Jenkins gives the most freedom in this regard but is weighed down by the JVM and outdated application architecture.
+These tools make assumptions that may get you moving quicker by sacrificing freedom. However, these assumptions will guide your architecture instead of facilitating your own decisions.
+
+Oddly enough, [Jenkins](http://jenkins-ci.org/) gives the most freedom but is weighed down by a bloated scope and the JVM. Its core is parsing HTTP payloads and running scripts in the given context. The rest of Jenkins is just a mess of functionality hacking.
+
+## A focus on freedom from assumptions
+
+This freedom is important to me because [DevOps](http://theagileadmin.com/what-is-devops/) demands control and understanding around my stack. I want my CI server to adapt to whatever deployment framework my applications use, such as [Ansible](http://www.ansible.com/) or Docker.
+
+As a developer who owns his own infrastructure, I'd rather be able to tell my CI what to run and where to put the results. Like any good Agile tool, it should facilitate my process without influencing it.
 
 ## Starting from the ground up
 
-Jenkins provides us with the most freedom because it simply runs scripts you define. A payload comes in, Jenkins unpacks it and runs your scripts with the given information. Whether you're using plugins or not, it all boils down to a glorified script-runner.
+Given this, I feel it's time to bring script running back to basics. I want an MVP look at a CI server that:
 
-Given this, I feel it's time to update our script-runner. We need easy automated deployment to improve DevOps. We need total freedom over what's being run and where the results go. What we need is an MVP look at what a CI server needs to be at its core.
+- performs builds through user-defined scripts
+- is easily deployed and configured via automation
+- has a narrow scope that is easily extended
+- is built with modern frameworks and architecture
 
-## Building a Robot Sweatshop
-
-Robot Sweatshop aims to be an intuitive, unopinionated CI server.
+[Robot Sweatshop](https://github.com/JScott/robot-sweatshop) aims to be that intuitive, unopinionated CI server for the DevOp in all of us.
