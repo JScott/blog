@@ -1,7 +1,6 @@
 ---
-layout: page
+layout: default
 title: Robot Sweatshop
-permalink: /robot-sweatshop/
 ---
 
 Robot Sweatshop is a Continuous Integration server built with Ruby. It is:
