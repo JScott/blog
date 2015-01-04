@@ -16,7 +16,7 @@ title: Solar Theme
 			<h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 		{% endif %}
 
-		<div class="post-content">{{ post.content }}</div>
+		<div class="post-content">{{ post.content | truncatewords: 50 }}</div>
 
 	</article>
 
