@@ -2,7 +2,9 @@
   <ul>
     <li><a href="{{ site.baseurl }}/">Latest Posts</a></li>
     {% for category in site.categories %}
-      <li><a href="{{ site.baseurl }}/projects/{{ category | first }}.html">{{ category | first }}</a></li>
+    <li><a href="{{ site.baseurl }}/projects/{{ category | first }}.html">
+      {{ category | first | wordify }}
+    </a></li>
     {% endfor %}
     <li>---</li>
     <li><a href="https://github.com/{{ site.github }}">
