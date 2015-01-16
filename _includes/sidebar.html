@@ -1,7 +1,9 @@
 <nav>
   <ul>
     <li><a href="{{ site.baseurl }}/">Latest Posts</a></li>
-    <li><a href="{{ site.baseurl }}/projects/robot-sweatshop.html">Robot Sweatshop</a></li>
+    {% for category in site.categories %}
+      <li><a href="{{ site.baseurl }}/projects/{{ category | first }}.html">{{ category | first }}</a></li>
+    {% endfor %}
     <li>---</li>
     <li><a href="https://github.com/{{ site.github }}">
       <i class="fa fa-github"></i> Github

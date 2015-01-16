@@ -1,6 +1,8 @@
 ---
-title: Testing Differently
+layout: post
+title: Testing differently
 category: canon
+comments: true
 ---
 
 Writing tests is always a hot topic among developers. There's undeniable, immediate benefit from doing [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_development) (TDD) but there's also significant work involved. It's a habit that needs training, a separate collection of skills and frameworks to learn, and is often dismissed as "extra" work that's "nice to have". There's real value in automated tests but the current implementations have room for improvement.
