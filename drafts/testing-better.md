@@ -1,29 +1,34 @@
-Writing tests always seems like a hot topic among developers. There's undeniable benefit almost immediately from doing [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_development) (TDD) but there's considerable work involved. It's a habit that needs to be trained, a separate collection of skills and frameworks to learn, and is often perceived as "extra" work that's "nice to have". We've found real value in automated tests but the implementation has room for improvement.
+---
+title: Testing Differently
+category: canon
+---
 
-I think it's worth a closer look at the tools we use to test our code. Maybe it's partially a matter of how our generation was taught to code but the mere fact that it isn't intuitive strikes me as odd. Instead of assuming it'll fix itself as our tools [evolve][1], I want to inspect how we could be approaching it from different angles.
+Writing tests is always a hot topic among developers. There's undeniable, immediate benefit from doing [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_development) (TDD) but there's also significant work involved. It's a habit that needs training, a separate collection of skills and frameworks to learn, and is often dismissed as "extra" work that's "nice to have". There's real value in automated tests but the current implementations have room for improvement.
 
-# Scaffolding Tests
+Because of this, it's worth a closer look at a different tool to test our code. We could blame other factors but I'm concerned that our tools don't feel as intuitive as they could be. Through discussions with [Chris Olstrom](github.com/colstrom), we've come up with a new approach that could offer another piece of the puzzle.
 
-One thing that I don't think has been explored enough is automatic generation of unit tests. Functional tests usually guide design and require human input but unit tests have value as well.
-https://github.com/locochris/rdd
+To explain it, I'd like to start with the context and history that led up to it.
 
-# Ruby is as Ruby does
+## Ruby is as Ruby does
 
-RubySpec was an attempt to create a centralized repository of tests that all Ruby interpreters should follow. It was shut down when Brian Shirai was [oddly upset](http://rubini.us/2014/12/31/matz-s-ruby-developers-don-t-use-rubyspec/) that the Ruby dev team didn't follow his tests. This enforces that there is only one canonical resource of what the specification of Ruby is: Matz's Ruby Interpreter (MRI).
+RubySpec tried to create a centralized repository of tests that all Ruby interpreters should follow. Brian Shirai discontinued the project when he was [oddly upset](http://rubini.us/2014/12/31/matz-s-ruby-developers-don-t-use-rubyspec/) that the Ruby dev team didn't follow his tests. Wherever you stand on the issue, this makes it clear that the behaviour of Matz's Ruby Interpreter (MRI) is the only canonical Ruby specification.
 
-When MRI changes, Ruby specs have changed. Cutely put, Ruby is as Ruby does.
+If MRI functionality changes then the Ruby specs have changed. Cutely put, Ruby is as Ruby does.
 
-If we apply this paradigm to our own code then it presents an interesting idea. The only way to test your code is to see what your code _does_ at runtime and compare it to previous versions. If we had a reliable metric for what our application does then we could diff those metrics and see what changed from a version we declare is "correct".
+This is an interesting concept that we can apply to anything written in a dynamically typed language that doesn't precompile. In terms of testing, we have to measure what the code *does* at runtime instead of what we *expect* it to do. If we had a reliable metric for our application's execution then we could compare it to the last "correct" version and see what changed.
 
-This metric isn't too hard to imagine. What your code does can be helpfully summarized by the inputs and outputs of your methods. With metaprogramming we can capture what methods are called and capture their input and output as a black box. Taking this a step further, we could track those outputs to see what methods are called on them. This is important with dynamically typed languages that rely on duck typing.
+This metric isn't too hard to imagine. You can summarize what your code does by the inputs and outputs of your methods. Since this group of languages makes use of [duck typing](http://en.wikipedia.org/wiki/Duck_typing), we can tell a lot from what the returned object is expected to respond to.
 
-## An example
+### An example
 
-These metrics might show us that `test_method` always gets passed two Strings and outputs a Hash that must respond to `puts`. In my most recent update it might tell me that it now expects to respond to `to_sym`. This is a problem because Hash doesn't do that so I either need to debug the input to fix the function or stop relying on `to_sym`.
+Imagine that these metrics tell me that my `foo_method` always gets passed a `String` and outputs a `Hash` that must respond to `puts`. Then I update my code and it now tells me my custom `parse_array` method gets called on the output as well. Now I know that I've unexpectedly broken my object chain and I have to fix my code.
 
-## Precedent
+### So what?
 
-This idea has a lot of parallels with [pdiff](http://mattjibson.com/blog/2013/06/11/perceptual-diffs-at-stack-overflow/), a relatively new testing metric. It doesn't tell you if your changes are "correct" but rather provides you a log to make that decision yourself. Likewise, this method-tracking concept in code provides you with a log that helps you decide if your code had any unintended side-effects.
+There's a lot you can do with this metric. You can auto-generate primitive unit tests. You can create reports for code as [pdiff](http://mattjibson.com/blog/2013/06/11/perceptual-diffs-at-stack-overflow/) does for rendering. You could even automate documentation that updates itself. It won't pass or fail but it'll give you new insights to improve your code.
 
+## Prototype
+
+Ruby's recent additions to metaprogramming make gathering this information possible. Chris and I are working on [a gem](https://github.com/colstrom/canon) to add this reporting to your code. If it's as useful as we hope, we'd like to port if to other languages as well. Stay tuned for more updates!
 
 [1]: e.g. xUnit becomes rspec becomes cucumber
