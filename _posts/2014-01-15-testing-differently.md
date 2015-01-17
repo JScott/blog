@@ -31,4 +31,4 @@ There's a lot you can do with this metric. You can auto-generate primitive unit 
 
 ## Prototype
 
-Ruby's recent additions to metaprogramming make gathering this information possible. Chris and I are working on [a gem](https://github.com/colstrom/canon) to add this reporting to your code. If it's as useful as we hope, we'd like to port if to other languages as well. Stay tuned for more updates!
+Ruby's recent additions to metaprogramming make gathering this information possible. Chris and I are working on [a gem](https://github.com/colstrom/self_identity) to add this reporting to your code. If it's as useful as we hope, we'd like to port if to other languages as well. Stay tuned for more updates!
