@@ -1,0 +1,24 @@
+# Why make another Continuous Integration server?
+
+The state of Continuous Integration as of writing is very opinionated. [Drone](https://drone.io/) requires [Docker](https://www.docker.com/) virtualization which is a good idea but demands a certain stack. [Travis CI](https://travis-ci.org/) is tied into GitHub and is not friendly for self-hosting. Both enforce the idea that 1 repository is linked to 1 build.
+
+These tools make assumptions that may get you moving quicker by sacrificing freedom. However, these assumptions will guide your architecture instead of facilitating your own decisions.
+
+Oddly enough, [Jenkins](http://jenkins-ci.org/) gives the most freedom but is weighed down by a bloated scope and the JVM. Its core is parsing HTTP payloads and running scripts in the given context. The rest of Jenkins is just a mess of functionality hacking.
+
+## A focus on freedom from assumptions
+
+This freedom is important to me because [DevOps](http://theagileadmin.com/what-is-devops/) demands control and understanding around my stack. I want my CI server to adapt to whatever deployment framework my applications use, such as [Ansible](http://www.ansible.com/) or Docker.
+
+As a developer who owns his own infrastructure, I'd rather be able to tell my CI what to run and where to put the results. Like any good Agile tool, it should facilitate my process without influencing it.
+
+## Starting from the ground up
+
+Given this, I feel it's time to bring script running back to basics. I want an MVP look at a CI server that:
+
+- performs builds through user-defined scripts
+- is easily deployed and configured via automation
+- has a narrow scope that is easily extended
+- is built with modern frameworks and architecture
+
+[Robot Sweatshop](https://github.com/JScott/robot-sweatshop) aims to be that intuitive, unopinionated CI server for the DevOp in all of us.
