@@ -1,0 +1,57 @@
+# Crouton
+
+For those who don't know, [crouton](https://github.com/dnschneid/crouton) is a fascinating tool that runs Linux distributions within Chrome OS. You can easily switch between the OS's which makes writing code on a Chromebook more comfortable. However, there are many little quirks and options to fiddle with so I wanted to summarize my journey.
+
+## CLI
+
+My first priority was simply the Ubuntu command-line. This was my main driver for a long time because it had the tools I'm used to and could replace the crosh shell.
+
+This was by far the easiest install. `sh crouton -r raring -t cli-extra` did the trick, as documented in the README. The only weird thing is that it defaulted to the release of precise even though raring is the latest LTS.
+
+It worked in a Chrome tab, just like crosh. However, it was a bit tricky to get more than one window going at a time. You [_can_ do it](https://github.com/adlr/croshwindow/issues/3) with `>crosh` as your target in Secure SSH but you probably want to get comfortable with [tmux](http://tmux.sourceforge.net/) instead. Just make sure to [rebind](https://github.com/JScott/configs/blob/master/dotfiles/.tmux.conf) tmux's default keys.
+
+![A CLI chroot running in a Chrome tab](/images/crouton-cli.jpg)
+
+## Adding graphics
+
+Things get complicated when you start wishing you had Sublime Text instead of nano all the time. Luckily, crouton can install many Linux distros, each with different pros and cons. However, there are some important packages that don't install by default.
+
+### Something simple (XFCE)
+
+My first attempt was a chroot with `-t xfce`. I never bothered with the desktop variants because I still wanted to rely on Chrome for my non-development tasks. It worked well but felt very weird coming from Chrome OS as the keyboard shortcuts were different and the trackpad wasn't as smooth.
+
+My current chroot is also XFCE but benefits from what I learned along the way. For example, you probably want each new chroot to have `-t keyboard,chrome,touch`. You could skip `touch` but I was working with an Acer C720P. Chrome helps sync things between your two OS's so `chrome` is a big time saver. More importantly, `keyboard` enables [key shortcuts](http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch74rbg) similar to what you get with Chrome OS. This and a bunch of OS customization ended up being a sweet spot for me.
+
+![crouton running XFCE](/images/crouton-xfce.jpg)
+
+### Something more (Unity/flashback)
+
+After my first attempt I wanted to try something more full-featured and visually interesting. `-t unity` seemed like a good choice. However, things seemed off once I started using it. Having to spend so much time replacing the awful terminal made me appreciate the one in XFCE. Unity is also known for slow down even on high-end systems.
+
+I solved Unity's bloat and slow down with [gnome-session-flashback](https://wiki.gnome.org/Projects/GnomeFlashback). It's not as easy as you think though because crouton wraps the session and thus you need to work with it to enable flashback.
+
+To [do that](https://github.com/dnschneid/crouton/issues/352), you want [gnome-session-wrapper](https://github.com/dnschneid/crouton/blob/master/chroot-bin/gnome-session-wrapper). On the chroot do the standard `apt-get install gnome-session-flashback` and then go back to crosh and run `startunity gnome-session-wrapper gnome-fallback`.
+
+![A chroot running Unity/flashback](/images/crouton-unity-flashback.jpg)
+
+### In a Chrome tab
+
+In the end, XFCE still felt more robust than Unity/flashback. However, the final frontier was to try `-t xiwi`. This replaced `xorg`, which gets inherited by most packages, and allows your chroot to interact with the [crouton integration Chrome extension](https://chrome.google.com/webstore/detail/crouton-integration/gcpneefbbnfalgjniomfjknbcgkbijom). Ultimately this means you can run your chroot in a Chrome tab.
+
+This was really cool and helpful. It enables stuff like running normal Chrome OS but with a full-featured terminal and Sublime Text. However, it was ham-stringed by the difficulty of running two chroot consoles and the lag from running both OS's at once. Nothing else was slowing down with 4GB of RAM and a Haswell Celeron but it was unacceptably slow for coding.
+
+Still, really cool. Maybe it'll run better on your [Pixel](https://www.google.com/chrome/devices/google-chromebook-pixel/).
+
+![A chroot running in a Chrome tab](/images/crouton-tab.jpg)
+
+### Two screen trouble
+
+One last thing worth mentioning is the difficulty I have with an external monitor. Going between Chrome OS and your chroot can mess up the display of Chrome OS. I just assume that I can't reliably swap between OS's at this point.
+
+It doesn't always happen but I'm not sure what causes it. It's a [known issue](https://github.com/dnschneid/crouton/issues/1105) for what that's worth.
+
+## Wrap up
+
+Crouton has really helped bring out the power of my Chromebook. I paid $350 CDN for this computer and it lets me write code, [play games](http://www.reddit.com/r/Crouton/comments/21v3t8/games_confirmed_to_work_on_acer_c720_2_gb/), and anything I normally do on the Internet - Twitter, reading, [3D modeling](https://clara.io/), etc.
+
+I have tried out more Linux distros in the past week than I have in my entire life because crouton made it simple and accessible. I've also been more active in writing code with this portable environment and crouton gives me more options in what I can code. It is well worth the price of admission.
