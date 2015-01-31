@@ -3,7 +3,7 @@ layout: default
 title: Solar Theme
 ---
 
-{% for post in paginator.posts %}
+{% for post in paginator.posts limit: 3 %}
 
 	<article class="post">
 
@@ -16,7 +16,7 @@ title: Solar Theme
 			<h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 		{% endif %}
 
-		<div class="post-content">{{ post.content | truncatewords: 50 }}</div>
+		<div class="post-content">{{ post.content | truncatewords: 40 }}</div>
 
 	</article>
 

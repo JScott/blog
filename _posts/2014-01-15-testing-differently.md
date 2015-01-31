@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Testing differently
-category: canon
+category: self_identity
 comments: true
 ---
 
