@@ -43,7 +43,7 @@ This means that Robot Sweatshop isn't purely functional but the restricted state
 
 ### Implementation
 
-[Monit](https://github.com/matiaskorhonen/monit) provides an excellent way to create persistent storages. Not only does it nicely abstract things but it supports File storage which means I don't need to introduce new dependencies.
+[Moneta](https://github.com/minad/moneta) provides an excellent way to create persistent key-value storages. Not only does it nicely abstract things but it supports File storage which means I don't need to introduce new dependencies.
 
 ## Functional testing
 
