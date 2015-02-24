@@ -5,7 +5,7 @@ category: robot-sweatshop
 comments: true
 ---
 
-A Continuous Integration server is a simple concept but ends up having a complex execution. At the core, we want to run scripts for every code commit. Robot Sweatshop was able to cut down a lot of complexity by limiting scope but that doesn't solve everything. Multiple workers, dying processes, and testing end up being things that Robot Sweatshop simplifies with functional and distributed programming.
+A continuous integration server is a deceptively simple concept. Robot Sweatshop limits scope but still has to deal with multiple workers, dying processes, and testing challenges. Functional and distributed programming can help address these issues.
 
 ## Dividing process responsibility
 
