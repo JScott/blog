@@ -5,18 +5,18 @@ category: robot-sweatshop
 comments: true
 ---
 
-A continuous integration server is a deceptively simple concept. Robot Sweatshop limits scope but still has to deal with multiple workers, dying processes, and testing challenges. Functional and distributed programming can help address these issues.
+A continuous integration server is a deceptively simple concept. Robot Sweatshop handles a lot of complexity by limiting scope but still has to deal with multiple workers, dying processes, and framework testing challenges. Functional and distributed programming can help address these issues.
 
 ## Dividing process responsibility
 
 To understand how Robot Sweatshop solves multiple workers, let's first understand the architecture of Robot Sweatshop. Here's a rough sketch of the data flow between processes:
 
-```
+{% highlight text %}
 *-in -> { payload, format, job_name }
 payload-parser -> { payload, job_name }
 job-assembler -> { context, commands }
 worker
-```
+{% endhighlight %}
 
 In previous iterations of the CI server I had a Sinatra server that relied on objects to parse and hold the payload data before going to the worker. A lot of responsibility was on that Sinatra server which made it hard to read and debug. It didn't help that Sinatra logging isn't great.
 
