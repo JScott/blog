@@ -1,0 +1,66 @@
+---
+layout: post
+title: Building Functional and Distributed CI
+category: robot-sweatshop
+comments: true
+---
+
+A Continuous Integration server is a simple concept but ends up having a complex execution. At the core, we want to run scripts for every code commit. Robot Sweatshop was able to cut down a lot of complexity by limiting scope but that doesn't solve everything. Multiple workers, dying processes, and testing end up being things that Robot Sweatshop simplifies with functional and distributed programming.
+
+## Dividing process responsibility
+
+To understand how Robot Sweatshop solves multiple workers, let's first understand the architecture of Robot Sweatshop. Here's a rough sketch of the data flow between processes:
+
+```
+*-in -> { payload, format, job_name }
+payload-parser -> { payload, job_name }
+job-assembler -> { context, commands }
+worker
+```
+
+In previous iterations of the CI server I had a Sinatra server that relied on objects to parse and hold the payload data before going to the worker. A lot of responsibility was on that Sinatra server which made it hard to read and debug. It didn't help that Sinatra logging isn't great.
+
+This improved by using microservices for each job that needed doing. Sinatra still responds to git hooks in http-in but immediately passes its information to the payload-parser. Then it's passed to job-assembler and then worker, each working independently to do its distinct job.
+
+Dividing these into functional, distributed process means a couple of things. Each process is:
+
+- Single-purpose, thus easier to understand
+- Under 50 lines of code, thus easier to debug
+- Input/Output driven, thus easier to test
+- Scalable, freely spinning up any number of workers
+
+### Implementation
+
+[ZMQ](http://zeromq.org/) provides a great way to transport data between processes. [EZMQ](https://github.com/colstrom/ezmq) provides Ruby-like abstraction around this.
+
+## Minimizing state
+
+Unfortunately these functional processes have a problem: they can drop jobs if they terminate unexpectedly. The only way to solve this was persistence, which means state.
+
+However, we can limit the state we rely on. In this case, I only needed to remember data passed between processes so I built a simple queueing system. The other processes still are functional but the single source they draw from is a queuing database.
+
+This means that Robot Sweatshop isn't purely functional but the restricted state doesn't much interfere with the mentioned benefits.
+
+### Implementation
+
+[Monit](https://github.com/matiaskorhonen/monit) provides an excellent way to create persistent storages. Not only does it nicely abstract things but it supports File storage which means I don't need to introduce new dependencies.
+
+## Functional testing
+
+Originally I was mostly doing unit testing because the responsibility wasn't per-process but per-method. However, functional testing tends to catch bugs better in my experience. Unit testing is good for sanity checking but the most valuable defects are the ones that disrupt user functionality.
+
+Functional and distributed development improved functional, black-box testing. It was very easy to inject data in a queue and see what came out the other side. There were also so few methods for each process that this gave good coverage.
+
+It also affected my TDD practices. I tended to define a few tests at a time that defined a microservice and then build the service to fill that. I don't have any data to say if this is positive or negative but I feel that it worked well.
+
+### Implementation
+
+I had used [RSpec](http://rspec.info/) but switched to [Kintama](https://github.com/lazyatom/kintama) during this project. They're very similar and it's hard to say one is better than the other here yet. Kintama just felt better to use at the time.
+
+I also tried [Cucumber](https://cukes.info/) briefly. While BDD is closer to functional testing, it enforced a heavy framework around it which worsened the readability and thus undermined the benefits I was getting from functional, distributed code.
+
+## Object-oriented isn't always right
+
+I do not deny that OOP is important and useful but it's also just another tool. Too often in technology we get wrapped up in one tool and use it for everything. To a dev with a hammer, every problem is a nail.
+
+In the case of this continuous integration server, we have a fairly linear path of events that are easily self-contained. Functional and distributed programming, respectively, are well suited for these assumptions and give us significant benefits.
