@@ -47,9 +47,9 @@ This means that Robot Sweatshop isn't purely functional but the restricted state
 
 ## Functional testing
 
-Originally I was mostly doing unit testing because the responsibility wasn't per-process but per-method. This is an unfortunate prejudice because functional testing tends to catch bugs better in my experience. Unit testing is good for sanity checking but the most valuable defects are the ones that disrupt user functionality.
+Originally I was mostly doing unit testing because the responsibility wasn't per-process but per-method. However, functional testing tends to catch bugs better in my experience. Unit testing is good for sanity checking but the most valuable defects are the ones that disrupt user functionality.
 
-Functional and distributed development improved black-box testing implementation and value. It was very easy to inject data in a queue and see what came out the other side. There were also so few methods for each process that it gave significant coverage.
+Functional and distributed development improved functional, black-box testing. It was very easy to inject data in a queue and see what came out the other side. There were also so few methods for each process that this gave good coverage.
 
 It also affected my TDD practices. I tended to define a few tests at a time that defined a microservice and then build the service to fill that. I don't have any data to say if this is positive or negative but I feel that it worked well.
 
@@ -61,6 +61,6 @@ I also tried [Cucumber](https://cukes.info/) briefly. While BDD is closer to fun
 
 ## Object-oriented isn't always right
 
-I do not deny that OOP is important and useful but it's just another tool. Too often in technology we get wrapped up in one tool and use it for everything. To a dev with a hammer, every problem is a nail.
+I do not deny that OOP is important and useful but it's also just another tool. Too often in technology we get wrapped up in one tool and use it for everything. To a dev with a hammer, every problem is a nail.
 
-In the case of Robot Sweatshop, we have a fairly linear path of events that are easily self-contained. Functional and distributed programming, respectively, are well suited for these assumptions and give us significant benefits.
+In the case of this continuous integration server, we have a fairly linear path of events that are easily self-contained. Functional and distributed programming, respectively, are well suited for these assumptions and give us significant benefits.
