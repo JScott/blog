@@ -60,7 +60,10 @@ sup { vertical-align: super; font-size: 0.85em; }
 sub { vertical-align: sub; font-size: 0.85em; }
 
 code {
-    font: 0.85em Monaco, Courier, Monospace;
+  font: 0.85em Monaco, Courier, Monospace;
+  background-color: #eee8d5;
+  border: 1px solid #d6ceb6;
+  border-radius: 3px 3px 3px 3px;
 }
 
 blockquote {
