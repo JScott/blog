@@ -132,6 +132,9 @@ h3 {
 #header h1 a {
 	border: none;
 }
+#header p {
+  font-size: 0.8em;
+}
 
 #footer {
 	width: 500px;
